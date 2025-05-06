@@ -1,0 +1,44 @@
+<html>
+<head>
+    <script src="../share/mobilewebkit.js"></script>
+    <script src="../share/smart_webkit.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Receipt example</title>
+</head>
+<body style="margin: 0; padding: 0">
+    <div id='container' class="ticket">
+        <img class="centered" src="logo.png" alt="Logo">
+        <p class="centered">RECIBO DE PRUEBA
+            <br>Direccion linea 1
+            <br>Direccion linea 2
+        </p>
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th class="description">descripcion</th>
+                    <th class="value">valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="description">MONTO</td>
+                    <td id='productValue' class="value">$300.00</td>
+                </tr>
+                <tr>
+                    <td class="description">IMPUESTO</td>
+                    <td id='taxes' class="value">$45.00</td>
+                </tr>
+                <tr>
+                    <td class="description">TOTAL A PAGAR</td>
+                    <td id='total' class="value">$345.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="centered">Gracias por su compra</p>
+    </div>
+    <script type="text/javascript">
+        (setParameters())
+    </script>
+</body>
+</html>

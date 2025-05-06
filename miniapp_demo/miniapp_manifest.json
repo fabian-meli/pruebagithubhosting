@@ -1,0 +1,22 @@
+{
+  "name": "Toteat",
+  "version": "1.0.0",
+  "related_hosts": [
+    "api.mercadolibre.com",
+    "webservices.saurus.net.br",
+    "res3.toteat.com",
+    "toteatglobal.appspot.com",
+    "www.toteat.com",
+    "storage.googleapis.com",
+    "www.facebook.com",
+    "accounts.google.com",
+    "appleid.apple.com",
+    "www.linkedin.com",
+    "oauth.vk.com",
+    "www.google.coms"
+  ],
+  "state_persistence": true,
+  "show_action_bar": false,
+  "client_id": "123868173678134737982",
+  "control_back_action": false
+}

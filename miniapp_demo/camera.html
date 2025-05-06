@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="share/mobilewebkit.js"></script>
+    <script src="share/smart_webkit.js"></script>
+    <script src="assets/callbacks.js"></script>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        div#callback-result {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            padding: 0px;
+        }
+        .form-dropdown {
+            background: white;
+        }
+        hr {
+            border: 1px solid #000;
+            margin: 12px 0;
+        }
+    </style>
+</head>
+<body style="background:#009ee3;">
+
+
+<h1 class="text-white text-center mt-5">CAMERA</h1>
+
+<div class="row">
+
+    <div class="col-10 offset-1">
+        <div class="card">
+            <div class="card-body">
+                <h2>Scanner</h2>
+                <div class="input-group input-group-lg mb-2">
+                    <div class="form-group w-100">
+                        <label for="data">Result</label>
+                        <textarea class="form-control" id="data" rows="2" readonly></textarea>
+                    </div>
+                </div>
+                <div class="scanner-group">
+                    <label for="parameters">Parameters</label>
+                    <div class="mt-2" id="parameters">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="form-lantern-initial-state">Lantern is on/off</span>
+                            <select class="form-dropdown" id="lantern"
+                                    aria-label="Form initial selector of lantern on or off">
+                                <option value="">NONE</option>
+                                <option value="true">TURN ON</option>
+                                <option value="false">TURN OFF</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="form-later-initial-orientation">Initial orientation</span>
+                            <select class="form-dropdown" id="orientation"
+                                    aria-label="Form initial orientation selector">
+                                <option value="">NONE</option>
+                                <option value="0">Landscape</option>
+                                <option value="1">Portrait</option>
+                            </select>
+                        </div>
+                        <a href="#"
+                           onclick="onLaunchBarcodeScanner(document.getElementById('lantern').value, document.getElementById('orientation').value)"
+                           class="btn btn-primary btn-lg d-block mt-2"><i class="fa fa-camera"></i>
+                            Launch Barcode scanner</a>
+                        <a href="#"
+                           onclick="onLaunchQRScanner(document.getElementById('orientation').value)"
+                           class="btn btn-primary btn-lg d-block mt-2"><i class="fa fa-camera"></i>
+                            Launch QR scanner</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+    <div id="callback-result"></div>
+
+</div>
+<script>
+    function onLaunchBarcodeScanner(lantern, orientation) {
+        let lanternValue = getLanternValue(lantern);
+        let orientationValue = getOrientationValue(orientation);
+        launchBarcodeReader1D(handleCallbackReaderResult, lanternValue, orientationValue);
+    }
+
+    function onLaunchQRScanner(orientation) {
+        let orientationValue = getOrientationValue(orientation);
+        launchBarcodeReader2D(handleCallbackReaderResult, orientationValue);
+    }
+
+    function handleCallbackReaderResult(result, error) {
+        if (result !== "error") {
+            document.getElementById("data").value = result;
+        } else {
+            document.getElementById("data").value = error.data;
+        }
+    }
+
+    function getLanternValue(lantern) {
+        if (lantern === "true") {
+            return true;
+        } else if (lantern === "false") {
+            return false;
+        } else {
+            return null;
+        }
+    }
+
+    function getOrientationValue(orientation) {
+        if (orientation === "0") {
+            return 0;
+        } else if (orientation === "1") {
+            return 1;
+        } else {
+            return null;
+        }
+    }
+</script>
+</body>
+</html>

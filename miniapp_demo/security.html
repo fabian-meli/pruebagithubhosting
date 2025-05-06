@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="share/mobilewebkit.js"></script>
+    <script src="share/smart_webkit.js"></script>
+    <script src="assets/utils.js"></script>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        div#callback-result {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            padding: 0px;
+        }
+
+        div#callback-result div {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body style="background:#009ee3;">
+
+
+<h1 class="text-white text-center mt-5"><i class="fas fa-lock"></i> SECURITY VALIDATION</h1>
+
+<div class="row">
+
+    <div class="col-10 offset-1 mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>Current Whitelist</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" id="currentUrl"></li>
+                    <li class="list-group-item">api.mercadolibre.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-10 offset-1 mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>Whitelist validation</h4>
+                <div class="card-body">
+                    <a href="payment.html" class="btn btn-primary btn-lg d-block mt-2"><i class="fas fa-check"></i> Internal Link allowed</a>
+                    <h6>Expected Result: Domain allowed. Must navigate to link.</h6>
+                </div>
+                <div class="card-body">
+                    <a href="https://www.google.com/" class="btn btn-primary btn-lg d-block mt-2"><i class="fas fa-times"></i> Link Not Allowed (Google.com)</a>
+                    <h6>Expected Result: Domain NOT allowed. Must navigate to a white screen.</h6>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="requestApiMeli()"><i class="fas fa-check"></i> Request Allowed (API MercadoLibre)</button>
+                    <h6>Expected Result: Domain allowed. Must show a Request success dialog. </h6>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="requestApiKraken()"><i class="fas fa-times"></i> Request Not Allowed (API Kraken)</button>
+                    <h6>Expected Result: Domain NOT allowed. Must show a Request error dialog. </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-10 offset-1 mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>Deeplinks validation</h4>
+                <a href="mercadopago://more_options" class="btn btn-primary d-block mt-2"><i class="fas fa-times"></i> mercadopago://more_options</a>
+                <h6>Expected Result: Operation NOT allowed. Must navigate to a white screen.</h6>
+             </div>
+        </div>
+    </div>
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Custom Request</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group">
+                    <input type="text" id="customRequest" class="form-control" value="https://api.themoviedb.org/3/movie/550?api_key=6de9e6ca9b27b18edd5756d2a36de0f9">
+                </div>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="requestCustom(document.getElementById('customRequest').value)">Make request</button>
+                <h6>Expected Result: show a dialog with success/error message depending if domain is allowed or not.  </h6>
+            </div>
+        </div>
+    </div>
+
+    <img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+    <div id="callback-result"></div>
+
+</div>
+
+<script type="text/javascript">
+
+    document.getElementById("currentUrl").innerHTML = window.location.hostname;
+
+    function callbackRequest(response, status) {
+        if(response===""){
+            response = "Error response"
+        }
+        if (status === 200) {
+            document.getElementById("callback-result").innerHTML = "<h2 class=\"bg-success text-white p-3 m-0 d-block\">Request Success <i class=\"far fa-window-close\" onclick='closeResult()'></i></h2><div class='p-2'>" + response + "</div>";
+        } else {
+            document.getElementById("callback-result").innerHTML = "<h2 class=\"bg-danger text-white p-3 m-0 d-block\">Request error <i class=\"far fa-window-close\" onclick='closeResult()'></i></h2><div class='p-2'>" + response + "</div>";
+        }
+    }
+
+    function requestApiMeli() {
+        closeResult();
+        makeRequest("https://api.mercadolibre.com/sites", callbackRequest);
+    }
+
+    function requestApiKraken() {
+        closeResult();
+        makeRequest("https://api.kraken.com/0/public/Ticker?pair=BTCUSD", callbackRequest)
+    }
+
+    function requestCustom(endpoint){
+        closeResult();
+        makeRequest(endpoint, callbackRequest)
+    }
+
+    function closeResult() {
+        document.getElementById("callback-result").innerHTML = "";
+    }
+
+    window.addEventListener("GlobalState.error", function (event) {
+        console.error("Error: " + event.args["message"]);
+    });
+
+</script>
+
+</body>
+</html>

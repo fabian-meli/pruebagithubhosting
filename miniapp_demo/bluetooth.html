@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+
+    <meta charset="UTF-8">
+    <title>Bluetooth</title>
+    <style>
+        div#callback-result {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            padding: 0px;
+        }
+
+        div#callback-result div {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .btn-check {
+            display: none;
+        }
+
+        .spinner-border-sm {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: -.125em;
+            border: .15em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: .75s linear infinite spinner-border;
+            animation: .75s linear infinite spinner-border;
+        }
+
+        ul#containerListDevicesFounded li {
+            background: whitesmoke;
+            margin-top: 6px;
+        }
+
+        #messageNotDevicesPaired {
+            padding: 20px;
+            background: gainsboro;
+            color: #828282;
+        }
+
+        li.list-group-item.d-flex {
+            padding: 0.3rem 0.3rem;
+        }
+
+        .card-body {
+            padding: 0.5rem;
+        }
+
+    </style>
+
+</head>
+<body style="background:#009ee3;" class="text-center">
+
+<div class="row">
+
+    <h1 class="text-white text-center mt-5"><i class="fab fa-bluetooth"></i> BLUETOOTH INTEGRATION</h1>
+
+    <div class="col-12 mt-5" style="margin-left:5px;margin-right: 5px;">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <label>Ignition</label>
+                    <div class="btn-group m-2" role="group">
+                        <input type="radio" class="btn-check " name="btEnable" id="btnTurn_on"
+                               onchange="handleChangeIgnition(this)" autocomplete="off" value="on">
+                        <label class="btn btn-outline-primary" for="btnTurn_on">On</label>
+                        <input type="radio" class="btn-check" name="btEnable" id="btnTurn_off"
+                               onchange="handleChangeIgnition(this)" autocomplete="off" value="off">
+                        <label class="btn btn-outline-danger" for="btnTurn_off">Off</label>
+                    </div>
+                    <div id="ignitionLoader" style="display: inline-block;padding-top: 10px;vertical-align: top;">
+                        <div class="spinner-border" role="status"></div>
+                    </div>
+                </div>
+                <div class="mt-5 mb-5">
+                    <h3 class="mt-5">Devices paired</h3>
+                    <div style="text-align: left;" class="mt-3">
+                        <ul id="containerListDevicesPaired" class="list-group bg-body"></ul>
+                        <div id="messageNotDevicesPaired" style="display: none;" class="bg-gradient"><h5
+                            class="text-center">Not Devices Paired</h5></div>
+                    </div>
+                </div>
+                <div class="mt-5 mb-5">
+                    <button id="buttonDetection" type="button" class="btn btn-primary btn-lg"
+                            onclick="onClickStartDiscovery()" disabled><span
+                        id="labelButtonDetection">Pair new device</span>
+                        <div id="detectionLoader" class="me-auto text-center" style="display: none;">
+                            <div class="spinner-border-sm" role="status"></div>
+                        </div>
+                    </button>
+                    <div style="text-align: left;" class="mt-3">
+                        <ul id="containerListDevicesFounded" class="list-group bg-body"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-5" style="margin-left:5px;margin-right: 5px;">
+        <div class="card">
+            <div class="card-body">
+                <h2>Scanner bar code</h2>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-barcode"></i></span>
+                    <input type="text" class="form-control" placeholder="Validates input here" aria-label="Username"
+                           aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mt-5" style="margin-left:5px;margin-right: 5px;">
+        <div class="card">
+            <div class="card-body">
+                <h2>Print Data with Printer Device</h2>
+                <div class="input-group mb-3">
+                    <input type="text" id="inputPrintData" class="form-control" placeholder="Input here">
+                </div>
+                <button id="btnPrint" class="btn btn-primary" onclick="onClickPrintData()">Print Data</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+</div>
+
+
+<div id="callback-result"></div>
+
+<script src="share/mobilewebkit.js"></script>
+<script src="share/smart_webkit.js"></script>
+<script src="assets/utils.js"></script>
+<script src="assets/bluetooth.js"></script>
+
+</body>
+</html>

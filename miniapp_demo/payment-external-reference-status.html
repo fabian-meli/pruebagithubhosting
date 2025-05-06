@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="share/mobilewebkit.js"></script>
+    <script src="share/smart_webkit.js"></script>
+    <script src="assets/utils.js"></script>
+    <script src="assets/payment.js"></script>
+    <script src="assets/callbacks.js"></script>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+
+    <title></title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        div#callback-result div {
+            overflow-y: auto;
+            background: white;
+            flex-grow: 1; /* Permite que el div crezca */
+            padding: 5px;
+        }
+
+        .content {
+            background-color: #f8f9fa; /* Color de fondo para mayor visibilidad */
+            border: 1px solid #dcdcdc; /* Borde ligero */
+            border-radius: 5px; /* Esquinas redondeadas */
+        }
+    </style>
+
+
+</head>
+<body style="background:#009ee3;">
+
+<div class="row">
+    <h1 class="text-white text-center mt-5">CHECK EXTERNAL REFERENCE</h1>
+
+    <div class="col-10 offset-1 mt-4">
+        <div class="card">
+            <div class="card-body">
+                <p>Input External reference</p>
+                <div class="input-group">
+                    <input type="text" id="externalReference" class="form-control" value=""/>
+                </div>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100"
+                        onclick="paymentCheckExternalReferenceStatus(document.getElementById('externalReference').value)">
+                    Execute
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+    <div id="callback-result">
+        <div class="content">
+            <!-- Aquí se mostrará el contenido del resultado -->
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

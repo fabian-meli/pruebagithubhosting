@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="share/mobilewebkit.js"></script>
+    <script src="share/smart_webkit.js"></script>
+    <script src="assets/commands.js"></script>
+    <script src="assets/utils.js"></script>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+
+    <title>Commands JS</title>
+
+    <style>
+        div#callback-result {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            padding: 0px;
+        }
+
+        div#callback-result div {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+
+
+
+    </style>
+
+</head>
+<body style="background:#009ee3;">
+
+<div class="row">
+    <h1 class="text-white text-center mt-5">COMMANDS JS</h1>
+
+    <!-- COMMAND: BACK -->
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Command: back</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>The number of screens to go back, default = 1</p>
+                <div class="input-group">
+                    <input type="number" id="inputBackScreens" class="form-control" value="1"/>
+                </div>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100"
+                        onclick="commandBack(parseInt(document.getElementById('inputBackScreens').value))">Execute
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMAND: CLOSE -->
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Command: close</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>It allows closing the flow of the landing webview from javascript</p>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="commandClose()">Execute</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMAND: HISTORY -->
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Command: history</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>Get browsing history</p>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="commandHistory()">Execute</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMAND: CLEAR HISTORY -->
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Command: clear history</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>Clear browser history</p>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="commandClearHistory()">Execute
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMAND: GET DEVICE INFO -->
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Command: info device</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>Get device info about:
+                <ul>
+                    <li>Serial Number</li>
+                    <li>Model and Reference</li>
+                    <li>Brand Name</li>
+                </ul>
+                </p>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="commandInfoDevice()">Execute
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMAND: GET LOGS -->
+
+    <div class="col-10 offset-1 mt-4">
+        <h3 class="text-white">Command: Get logs</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>Get stored logs</p>
+                <button class="btn btn-primary btn-lg d-block mt-2 w-100" onclick="commandGetLog()">Execute</button>
+            </div>
+        </div>
+    </div>
+
+    <img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+    <div id="callback-result"></div>
+
+</div>
+
+</body>
+</html>

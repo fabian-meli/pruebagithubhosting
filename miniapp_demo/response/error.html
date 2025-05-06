@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="share/smart_webkit.js"></script>
+		<link href="../assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+		<style>
+	td{
+		white-space: pre-wrap;
+    max-width: 70px;
+	}
+	</style>
+    </head>
+    <body class="bg-danger">
+	
+	
+	  <h1 class="text-white text-center mt-5"><i class="fas fa-exclamation-circle"></i> OCURRIO UN ERROR</h1>
+	  
+
+	
+	<div class="row">
+	 
+	  <div class="col-10 offset-1 mt-4">
+	   <div class="card">
+	    <div class="card-body">
+		<table class="table table-striped">
+		<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Parametro</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+		<tbody id="data">
+		</tbody>
+		</table>
+		<a href="../index.html" class="btn btn-primary btn-lg d-block"><i class="fas fa-undo"></i> Ir al inicio</a>
+	   </div>
+  </div>
+	  </div>
+	  
+  <img style="width: 55%;margin: auto;margin-top: 40px;" src="../assets/mercadopago-light.svg"/>
+	  
+  
+</div>
+        <script type="text/javascript">
+    var regex=/[?|&]([aA-zZ-]+)={1}([aA-zZ0-9=%.-]+)/g;
+        var queryString = window.location.href;
+        var matches = queryString.match(regex);
+        var obj = {};
+		var output="";
+		console.log(matches);
+        for (var i = 0; i < matches.length; i++) {
+            var matchGroup = regex.exec(queryString);
+            obj[matchGroup[1]] = matchGroup[2];
+            output+="<tr><td>"+(1+i)+"</td>"+"<td>"+matchGroup[1]+"</td><td>"+matchGroup[2]+"</td></tr>";
+        }
+		document.getElementById("data").innerHTML=output;
+</script>
+    </body>
+</html>

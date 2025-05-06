@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="share/mobilewebkit.js"></script>
+    <script src="share/smart_webkit.js"></script>
+    <script src="assets/callbacks.js"></script>
+    <script src="assets/commands.js"></script>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        div#callback-result {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body style="background:#009ee3;">
+
+<div class="row">
+
+    <h2 class="text-white text-center mt-5">DEMO MINIAPP</h2>
+
+    <img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+    <div class="col-10 offset-1 mt-4">
+        <div class="card">
+            <div class="card-body">
+                <a href="payment.html" class="btn btn-primary d-block"><i class="far fa-credit-card"></i> Start payment flow</a>
+                <a href="payment-method.html" class="btn btn-primary d-block mt-2"><i class="far fa-credit-card"></i> Start payment method</a>
+                <a href="payment-external-reference-status.html" class="btn btn-primary d-block mt-2"><i class="far fa-credit-card"></i> Check payment order status</a>
+                <a href="security.html" class="btn btn-primary d-block mt-2"><i class="fas fa-lock"></i> Security validation</a>
+                <a href="commands.html" class="btn btn-primary d-block mt-2"><i class="fas fa-terminal"></i> Commands JS</a>
+                <a href="bluetooth.html" class="btn btn-primary d-block mt-2"><i class="fab fa-bluetooth"></i> Bluetooth integration</a>
+                <a href="#" onclick="bluetoothSettings()" class="btn btn-primary d-block mt-2"><i class="fab fa-bluetooth"></i> Bluetooth settings</a>
+                <a href="printer.html" class="btn btn-primary d-block mt-2"><i class="fas fa-print"></i> Printer integration</a>
+                <a href="camera.html" class="btn btn-primary d-block mt-2"><i class="fa fa-camera"></i> Camera</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="callback-result"></div>
+
+</div>
+
+<script>
+    window.onload = function() {
+        commandClearHistory();
+    }
+
+    function bluetoothSettings() {
+        launchBluetoothSettings(callbackResult)
+    }
+
+    function callbackResult(result, error) {
+        console.log("callbackResult called from launchBluetoothSettings")
+    }
+
+
+
+</script>
+</body>
+</html>

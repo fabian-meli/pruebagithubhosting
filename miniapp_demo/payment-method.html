@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="share/mobilewebkit.js"></script>
+    <script src="share/smart_webkit.js"></script>
+    <script src="assets/payment.js"></script>
+    <script src = "assets/callbacks.js"></script>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/fontawesome/all.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        div#callback-result {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            padding: 0px;
+        }
+        .form-select-taxes .form-select-taxes {
+            background: white;
+        }
+    </style>
+</head>
+<body style="background:#009ee3;">
+
+
+    <h1 class="text-white text-center mt-5">PAYMENT METHOD</h1>
+
+
+    <div class="row">
+        <div class="col-10 offset-1 mt-4">
+            <div class="card">
+                <div id="menu_payment_method" class="card-body">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Amount</span>
+                        <input type="number" id="amount" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    </div>
+                    <div class="input-group inputGroup-description">
+                        <span class="input-group-text" id="inputGroup-description">Descr.</span>
+                        <input type="text" id="description" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-description">
+                    </div>
+                    <div class="input-group form-select-taxes">
+                        <span class="input-group-text" id="form-taxes">Tax</span>
+                        <select class="form-select-taxes" id="taxes" aria-label="Form taxes selector">
+                            <option value="NONE">NONE</option>
+                            <option value="PAYMENT_EXEMPT_IVA">PAYMENT_EXEMPT_IVA</option>
+                            <option value="PAYMENT_TAXABLE_IVA">PAYMENT_TAXABLE_IVA</option>
+                        </select>
+                    </div>
+                    <h4  class="mt-4">Launch payment method</h4>
+                    <div id="spinner_payment_method" class="spinner-border" role="status"></div>
+              </div>
+          </div>
+      </div>
+
+      <img style="width: 55%;margin: auto;margin-top: 40px;" src="assets/mercadopago-light.svg"/>
+
+      <div id="callback-result"></div>
+
+  </div>
+  <script>
+    window.onload = getAvailablePaymentMethods;
+</script>
+</body>
+</html>
